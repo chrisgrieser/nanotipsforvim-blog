@@ -1,4 +1,4 @@
-.PHONY: new_from_template publish_most_recent publish_meta help
+.PHONY: new_from_template publish_most_recent publish_meta show_help
 
 publish_most_recent:
 	most_recent="./articles/$$(ls -t "./articles/" | head -n1)" && \
@@ -14,5 +14,5 @@ new_from_template:
 publish_meta:
 	scp ./_*.{md,css} prose.sh:/
 
-help:
+show_help:
 	open "https://pico.sh/prose"

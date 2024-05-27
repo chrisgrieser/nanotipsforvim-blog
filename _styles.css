@@ -1,0 +1,25 @@
+/* DOCS https://pico.sh/prose#how-can-i-change-the-theme-of-my-blog */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+/* no line numbers for one line */
+code .line:only-child .ln {
+	display: none;
+}
+
+.footnotes {
+	font-size: 80%;
+}
+
+/* no double hr when using footnotes */
+main:has(.footnotes)+footer hr {
+	display: none;
+}
+
+/* remove the signature, but keep overscroll */
+body footer {
+	display: none;
+}
+
+main {
+	margin-bottom: 200px;
+}

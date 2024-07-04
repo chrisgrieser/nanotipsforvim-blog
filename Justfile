@@ -5,6 +5,10 @@ set quiet := true
 publish_most_recent:
     #!/usr/bin/env zsh
     most_recent="./articles/$(ls -t "./articles/" | head -n1)"
+    if [[ "$most_recent" == "Untitled.md" ]]; then
+        echo "File still named 'Untitled.md'. Please rename it."
+        exit 1
+    fi
     url=$(scp "$most_recent" prose.sh:/ 2>&1 | sed 's/[[:space:]]*$//')
     echo "$url" | pbcopy
     open "$url"

@@ -13,6 +13,10 @@ publish_most_recent:
     echo "$url" | pbcopy
     open "$url"
 
+    git add "$most_recent"
+    git commit -m "Published: $most_recent"
+    git push
+
 new_from_template:
     #!/usr/bin/env zsh
     iso_today=$(date +"%Y-%m-%d")

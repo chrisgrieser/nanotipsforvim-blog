@@ -4,7 +4,7 @@ date: 2024-08-11T00:00:00.000Z
 tags:
   - plugins
 ---
-*A brief explainer I originally wrote in a hackernews comment.*
+> A brief explainer I originally wrote in a hackernews comment.
 
 As opposed to being a plugin manager,
 [mason.nvim](http://github.com/williamboman/mason.nvim) is a package manager. It

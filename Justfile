@@ -1,20 +1,24 @@
 set quiet := true
 
-#───────────────────────────────────────────────────────────────────────────────
-
 publish_most_recent:
     #!/usr/bin/env zsh
-    most_recent="./articles/$(ls -t "./articles/" | head -n1)"
+    cd "./articles" || return 1
+    most_recent=$(ls -t | head -n1)
     if [[ "$most_recent" == "Untitled.md" ]]; then
-        echo "File still named 'Untitled.md'. Please rename it."
-        exit 1
+        slug_title=$(cat "$most_recent" | 
+            grep --max-count=1 '^title: ' | 
+            tr -d '?!' | 
+            sed -e 's/title: //' -e 's/[^A-Za-z0-9]/-/g' | 
+            tr "A-Z" "a-z")
+        mv "$most_recent" "$slug_title.md"
+        most_recent="$slug_title.md"
     fi
     url=$(scp "$most_recent" prose.sh:/ 2>&1 | sed 's/[[:space:]]*$//')
     echo "$url" | pbcopy
     open "$url"
 
     git add "$most_recent"
-    git commit -m "Published: $most_recent"
+    git commit -m "publish: $most_recent"
     git push
 
 new_from_template:

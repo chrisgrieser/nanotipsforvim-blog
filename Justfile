@@ -30,5 +30,9 @@ new_from_template:
 update_blog_config:
     scp ./_*.{md,css} prose.sh:/
 
+# https://pico.sh/ui#ssh-tui
+prose_dashboard:
+    ssh prose.sh
+
 show_help:
     open "https://pico.sh/prose"

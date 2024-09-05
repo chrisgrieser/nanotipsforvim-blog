@@ -19,7 +19,7 @@ made the jump to their own config yet.
 This config includes:
 
 1. a plugin manager (lazy.nvim)
-2. LSPs (in this case `lua_ls` and `tsserver`)
+2. LSPs (in this case `lua_ls` and `ts_ls`)
 3. auto-completions for the LSPs
 4. Treesitter for syntax highlighting
 
@@ -62,7 +62,7 @@ local myPlugins = {
 				opts = {
 					ensure_installed = {
 						"lua_ls",
-						"tsserver",
+						"ts_ls",
 						-- add other LSPs here, find the names here: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 					},
 					run_on_start = true,
@@ -83,7 +83,7 @@ local myPlugins = {
 				capabilities = capabilities,
 				settings = {},
 			})
-			require("lspconfig").tsserver.setup({
+			require("lspconfig").ts_ls.setup({
 				capabilities = capabilities,
 				settings = {},
 			})

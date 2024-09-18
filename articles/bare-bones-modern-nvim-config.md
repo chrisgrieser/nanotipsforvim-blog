@@ -1,5 +1,5 @@
 ---
-title: A bare bones modern nvim config
+title: A bare bones modern nvim config in < 100 lines
 date: 2024-09-04T00:00:00.000Z
 tags:
   - kickstart
@@ -24,7 +24,7 @@ This config includes:
 4. Treesitter for syntax highlighting
 
 Everything is bootstrapped, meaning lazy.nvim, LSPs, and treesitter parsers
-are automatically installed on the first run.
+are automatically installed on the first run. Less than 100 lines of code.
 
 **Usage**  
 1. Save the code below as: `~/.config/nvim/init.lua` (macOS) or
@@ -78,10 +78,16 @@ local myPlugins = {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-			-- run this for each LSP
+			-- run the `.setup` call for each LSP, together with any LSP
+			-- configuration you want to make
 			require("lspconfig").lua_ls.setup({
 				capabilities = capabilities,
-				settings = {},
+				settings = {
+					Lua = {
+						-- so lua_ls does not complain about `vim` being an undefined global
+						diagnostics = { globals = {"vim"} }
+					}
+				},
 			})
 			require("lspconfig").ts_ls.setup({
 				capabilities = capabilities,

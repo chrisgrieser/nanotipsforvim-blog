@@ -20,21 +20,24 @@ position, and then uses the `TextYankPost` autocommand to restore the cursor
 after the yank operation.
 
 ```lua
-local cursorPreYank
 vim.keymap.set({ "n", "x" }, "y", function()
-	cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y"
 end, { expr = true })
 vim.keymap.set("n", "Y", function()
-	cursorPreYank = vim.api.nvim_win_get_cursor(0)
+	vim.b.cursorPreYank = vim.api.nvim_win_get_cursor(0)
 	return "y$"
 end, { expr = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		if vim.v.event.operator == "y" and cursorPreYank then
-			vim.api.nvim_win_set_cursor(0, cursorPreYank)
+		if vim.v.event.operator == "y" and vim.b.cursorPreYank then
+			vim.api.nvim_win_set_cursor(0, vim.b.cursorPreYank)
 		end
 	end,
 })
 ```
+
+**Edit 2025-03-23**  
+[Use buffer-local `cursorPreYank`.](https://github.com/chrisgrieser/nanotipsforvim-blog/issues/1)
+

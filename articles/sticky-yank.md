@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		if vim.v.event.operator == "y" and vim.b.cursorPreYank then
 			vim.api.nvim_win_set_cursor(0, vim.b.cursorPreYank)
+			vim.b.cursor_pre_yank = nil
 		end
 	end,
 })
@@ -40,4 +41,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 **Edit 2025-03-23**  
 [Use buffer-local `cursorPreYank`.](https://github.com/chrisgrieser/nanotipsforvim-blog/issues/1)
-

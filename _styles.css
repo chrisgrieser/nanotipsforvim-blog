@@ -1,8 +1,9 @@
 /* DOCS https://pico.sh/prose#how-can-i-change-the-theme-of-my-blog */
 /* ────────────────────────────────────────────────────────────────────────── */
 
-/* no line numbers for one line */
-code .line:only-child .ln {
+/* hide line numbers for better copying 
+ * https://pkm.social/@garlicWharfRat@mastodon.online/114388058730246621 */
+code .line .ln {
 	display: none;
 }
 
@@ -11,7 +12,7 @@ code .line:only-child .ln {
 }
 
 /* no double hr when using footnotes */
-main:has(.footnotes)+footer hr {
+main:has(.footnotes) + footer hr {
 	display: none;
 }
 
